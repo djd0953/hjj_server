@@ -5,6 +5,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+      - ./shared:/app/shared
     stdin_open: true
     tty: true
 
@@ -14,3 +15,4 @@ services:
       - "4000:4000"
     volumes:
       - ./backend:/app
+      - ./shared:/app/shared
