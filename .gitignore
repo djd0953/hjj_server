@@ -1,7 +1,1 @@
 node_modules
-dist
-.env
-Dockerfile
-docker-compose.override.yml
-EOF
-.vscode
