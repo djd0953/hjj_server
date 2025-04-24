@@ -8,11 +8,9 @@
         "baseUrl": "./src",
         "paths": {
             "@config/*": ["config/*"],
-            "@controllers/*": ["controllers/*"],
-            "@modules/*": ["modules/*"],
-            "@services/*": ["services/*"]
+            "@modules/*": ["modules/*"]
         }
     },
     "include": ["src", "test"],
-    "exclude": ["node_modules", "dist", "test", "**/*.spec.ts", "**/*.test.ts", "**/*.e2e-spec.ts"]
+    "exclude": ["node_modules", "dist", "test", "**/*.test.ts", "**/*.e2e-spec.ts"]
 }

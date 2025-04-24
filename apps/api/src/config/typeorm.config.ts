@@ -30,8 +30,11 @@ export class mySqlConfig {
 				username: process.env.LF_POSTGRES_USER || 'localhost',
 				password: process.env.LF_POSTGRES_PASS || '1234',
 				database: process.env.LF_POSTGRES_DB || 'postgres',
-				entities: [__dirname + '/../modules/**/*.entity.ts'],
+				entities: [__dirname + '/../modules/**/*.entity.{ts,js}'],
 				synchronize: true, // Set to false in production
+				ssl: {
+					rejectUnauthorized: false,
+				}
 			}
 		}
 		else {
