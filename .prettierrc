@@ -8,8 +8,7 @@
     "bracketSameLine": true,
     "arrowParens": "always",
     "plugins": [
-        "prettier-plugin-import-sort",
-        "prettier-plugin-tailwindcss"
+        "prettier-plugin-import-sort"
     ],
     "importOrder": [
         "^(react/(.*)$)|^(react$)|^(next/(.*)$)|^(next$)",
