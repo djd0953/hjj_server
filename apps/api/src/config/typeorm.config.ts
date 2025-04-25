@@ -18,7 +18,7 @@ export class mySqlConfig {
 				password: process.env.LF_MYSQL_PASS || '1234',
 				database: process.env.LF_MYSQL_DB || 'test',
 				entities: [__dirname + '/../modules/**/*.entity.ts'],
-				synchronize: true, // Set to false in production
+				synchronize: true
 			}
 		}
 		else if (this.type === 'postgres') 
@@ -31,7 +31,7 @@ export class mySqlConfig {
 				password: process.env.LF_POSTGRES_PASS || '1234',
 				database: process.env.LF_POSTGRES_DB || 'postgres',
 				entities: [__dirname + '/../modules/**/*.entity.{ts,js}'],
-				synchronize: true, // Set to false in production
+				synchronize: true,
 				ssl: {
 					rejectUnauthorized: false,
 				}
@@ -46,7 +46,7 @@ export class mySqlConfig {
 				password: '1234',
 				database: 'test',
 				entities: [__dirname + '/../modules/**/*.entity.ts'],
-				synchronize: true, // Set to false in production
+				synchronize: true
 			}
 		} 
 	}
