@@ -27,18 +27,17 @@ Set-ExecutionPolicy RemoteSigned -Scope Process
 
 # Repository 메서드
 
-```
-    함수	                        역할	                                    주의점
-    save(data)	            삽입 또는 수정 (PK 없으면 INSERT, 있으면 UPDATE)	 내부에서 create()와 insert/update를 자동 처리
-    insert(data)	        INSERT 전용, 빠름	                            반환값이 id 없음
-    update(조건, data)	     UPDATE 전용	                                조건부 수정, 객체 반환 아님
-    remove(entity)	        완전 삭제 (엔티티 필요)	                           DB에서 row 삭제
-    softDelete(조건)	     @DeleteDateColumn 있는 경우만 사용 가능	        소프트 삭제
-    restore(조건)	         softDeleted 된 row 복구	                     softDelete랑 짝꿍
-    count()	                조건에 맞는 row 개수	                          통계용으로 좋아
-    findOne({ where: {} })	조건으로 단일 조회	                               보통 로그인 시 유저 찾기 등
-    create(data)	        실제 DB에 넣진 않고, 엔티티 형태만 생성	save() 전에 사용됨
-```
+| 함수                     | 역할                                             | 주의점                                              |
+| ------------------------ | ------------------------------------------------ | --------------------------------------------------- |
+| `save(data)`             | 삽입 또는 수정 (PK 없으면 INSERT, 있으면 UPDATE) | 내부에서 `create()`와 `insert`/`update`를 자동 처리 |
+| `insert(data)`           | INSERT 전용, 빠름                                | 반환값에 id 없음                                    |
+| `update(조건, data)`     | UPDATE 전용                                      | 조건부 수정, 객체 반환 아님                         |
+| `remove(entity)`         | 완전 삭제 (엔티티 필요)                          | DB에서 row 삭제                                     |
+| `softDelete(조건)`       | `@DeleteDateColumn` 있는 경우만 사용 가능        | 소프트 삭제                                         |
+| `restore(조건)`          | `softDeleted` 된 row 복구                        | `softDelete`랑 짝꿍                                 |
+| `count()`                | 조건에 맞는 row 개수                             | 통계용으로 좋음                                     |
+| `findOne({ where: {} })` | 조건으로 단일 조회                               | 보통 로그인 시 유저 찾기 등                         |
+| `create(data)`           | 실제 DB에 넣진 않고, 엔티티 형태만 생성          | `save()` 전에 사용됨                                |
 
 # TypeORM에서 자주 사용되는 데코레이터 정리
 
