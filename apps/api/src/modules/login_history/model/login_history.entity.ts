@@ -2,7 +2,7 @@ import { User } from '@modules/user/model/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, JoinColumn, ManyToOne, Index } from 'typeorm';
 
 @Entity('login_history')
-@Index(['user_id', 'createdAt'])
+// @Index(['user_id', 'createdAt'])
 export class LoginHistory
 {
     @PrimaryGeneratedColumn()
@@ -26,14 +26,18 @@ export class LoginHistory
     @Column({ name: 'is_login', default: false})
     isLogin!: boolean;
 
-    @CreateDateColumn({ type: 'timestamp' })
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt!: Date;
 
-    @UpdateDateColumn({ type: 'timestamp' })
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
     updatedAt!: Date;
 
-    @DeleteDateColumn({ nullable: true })
+    @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
     deletedAt!: Date | null;
+
+    @Index()
+    @Column({ name: 'user_id', type: 'int' })
+    userId!: number;
 
     @ManyToOne(() => User, (user) => user.loginHistories)
     @JoinColumn({ name: 'user_id' })

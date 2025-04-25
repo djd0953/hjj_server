@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { LoginHistory } from '@modules/login_history/model/login_history.entity';
 
 @Entity('user')
-@Index(['email'], { unique: true })
+// @Index(['email'], { unique: true })
 export class User 
 {
     @PrimaryGeneratedColumn()
@@ -11,19 +11,20 @@ export class User
     @Column({ type: 'varchar', length: 255 })
     name!: string;
 
+    @Index({unique: true})
     @Column({ type: 'varchar', length: 255, unique: true })
     email!: string;
 
     @Column({ type: 'varchar', length: 255, select: false })
     password!: string;
 
-    @CreateDateColumn({ type: 'timestamp' })
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt!: Date;
 
-    @UpdateDateColumn({ type: 'timestamp' })
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
     updatedAt!: Date;
 
-    @DeleteDateColumn({ nullable: true })
+    @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
     deletedAt!: Date | null;
 
     @OneToMany(() => LoginHistory, (login) => login.user)

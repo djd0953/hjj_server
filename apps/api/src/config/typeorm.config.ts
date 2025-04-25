@@ -32,6 +32,7 @@ export class mySqlConfig {
 				database: process.env.LF_POSTGRES_DB || 'postgres',
 				entities: [__dirname + '/../modules/**/*.entity.{ts,js}'],
 				synchronize: true,
+				dropSchema: true,
 				ssl: {
 					rejectUnauthorized: false,
 				}
