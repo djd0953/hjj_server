@@ -1,17 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { User } from '@modules/user/model/user.entity';
 import { LoginHistory } from '@modules/login_history/model/login_history.entity';
 import { Request } from 'express';
+import { UserService } from '@modules/user/user.service';
+import { LoginHistoryService } from '@modules/login_history/login_history.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User) private readonly userRepo: Repository<User>,
-    @InjectRepository(LoginHistory) private readonly historyRepo: Repository<LoginHistory>,
+    @Inject(UserService) private readonly userService: UserService,
+    @Inject(LoginHistoryService) private readonly loginHistory: LoginHistoryService,
     private readonly dataSource: DataSource,
-  ) {}
+
+    ) {}
 
   async validateAndLogUser(email: string, password: string, req: Request) {
     const queryRunner = this.dataSource.createQueryRunner();
@@ -19,13 +22,13 @@ export class AuthService {
     await queryRunner.startTransaction();
 
     try {
-      const user = await this.userRepo.findOne({ where: { email } });
+      const user = await this.userService.findOne({ where: { email } }, queryRunner);
 
       if (!user || user.password !== password) {
         throw new Error('Invalid credentials');
       }
 
-      const history = this.historyRepo.create({
+      const history = this.loginHistory.create({
         user: user,
         userAgent: req.headers['user-agent'] || '',
         browserName: 'Chrome', // 필요 시 파싱

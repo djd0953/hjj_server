@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { DataSource, QueryRunner, Repository } from 'typeorm';
 import { User } from './model/user.entity';
 
 @Injectable()
@@ -9,48 +9,73 @@ export class UserService
     constructor(
         @InjectRepository(User)
         private readonly userRepo: Repository<User>,
+        @InjectDataSource()
         private readonly dataSource: DataSource, // 트렌잭션
     ) {}
 
-    findAll(): Promise<User[]> {
-        return this.userRepo.find();
+    findAll(queryRunner?: QueryRunner): Promise<User[]> {
+        if (queryRunner)
+            return queryRunner.manager.find(User);
+        else
+            return this.userRepo.find();
     }
 
-    async create(userData: Partial<User>): Promise<User> {
-        const queryRunner = this.dataSource.createQueryRunner();
+    findOne(condition: any, queryRunner?: QueryRunner): Promise<User | null> {
+        if (queryRunner)
+            return queryRunner.manager.findOne(User, condition);
+        else
+            return this.userRepo.findOne(condition);
+    }
 
-        await queryRunner.connect();
-        await queryRunner.startTransaction();
+    async create(userData: Partial<User>, queryRunner?: QueryRunner): Promise<User> {
+        let transaction: QueryRunner | undefined = queryRunner;
+
+        if (!transaction) {
+            transaction = this.dataSource.createQueryRunner();
+            await transaction.connect();
+            await transaction.startTransaction();
+        }
 
         try {
-            const user = queryRunner.manager.create(User, userData);
-            const savedUser = await queryRunner.manager.save(user);
+            const user = transaction.manager.create(User, userData);
+            const savedUser = await transaction.manager.save(user);
 
-            await queryRunner.commitTransaction();
             return savedUser;
         }
         catch (error) {
-            await queryRunner.rollbackTransaction();
+            if (queryRunner) {
+                await transaction.rollbackTransaction();
+            }
+
             throw error;
         }
         finally {
-            await queryRunner.release();
+            if (!queryRunner) {
+                await transaction.release();
+            }
         }
     }
 
-    async delete(id: number): Promise<void> {
-        const queryRunner = this.dataSource.createQueryRunner();
-        await queryRunner.connect();
-        await queryRunner.startTransaction();
+    async delete(id: number, queryRunner?: QueryRunner): Promise<void> {
+        let transaction: QueryRunner | undefined = queryRunner; 
+
+        if (!transaction) {
+            transaction = this.dataSource.createQueryRunner();
+            await transaction.connect();
+            await transaction.startTransaction();
+        }
 
         try {
-            await queryRunner.manager.delete(User, id);
-            await queryRunner.commitTransaction();
+            await transaction.manager.update(User, id, { deletedAt: new Date() });
+            await transaction.commitTransaction();
         } catch (error) {
-            await queryRunner.rollbackTransaction();
+            if (queryRunner)
+                await transaction.rollbackTransaction();
+
             throw error;
         } finally {
-            await queryRunner.release();
+            if (queryRunner)
+                await queryRunner.release();
         }
     }
 }
