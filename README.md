@@ -8,23 +8,22 @@ Set-ExecutionPolicy RemoteSigned -Scope Process
 
 # Service에서 사용하는 CRUD 메서드
 
-```
-    메서드	                설명
-    find()	        전체 목록 조회 (SELECT * FROM user)
-    findOne()	    조건에 맞는 단일 엔티티 조회
-    findBy()	    find의 조건 버전 (find({ where: { name: 'hj' } })이랑 같음)
-    findOneBy()	    findOne의 간단 버전
-    findAndCount()	결과와 전체 개수를 함께 조회 ([data, count])
-    save(entity)	엔티티 삽입 또는 수정 (PK 유무로 구분)
-    insert()	    삽입 전용 (속도 빠름, 반환 값 제한)
-    update()	    수정 전용 (엔티티 안 쓰고 조건+값만 씀)
-    delete()	    조건에 맞는 레코드 삭제
-    softDelete()	소프트 삭제 (엔티티에 @DeleteDateColumn 필요)
-    restore()	    소프트 삭제 복원
-    count()	        조건에 맞는 개수 카운팅
-    query()	        쿼리 직접 작성 (raw SQL)
-    create()	    save() 전에 빈 Entity 인스턴스 생성
-```
+|     메서드     |                            설명                             |
+| :------------: | :---------------------------------------------------------: |
+|     find()     |            전체 목록 조회 (SELECT \* FROM user)             |
+|   findOne()    |                조건에 맞는 단일 엔티티 조회                 |
+|    findBy()    | find의 조건 버전 (find({ where: { name: 'hj' } })이랑 같음) |
+|  findOneBy()   |                     findOne의 간단 버전                     |
+| findAndCount() |        결과와 전체 개수를 함께 조회 ([data, count])         |
+|  save(entity)  |           엔티티 삽입 또는 수정 (PK 유무로 구분)            |
+|    insert()    |             삽입 전용 (속도 빠름, 반환 값 제한)             |
+|    update()    |           수정 전용 (엔티티 안 쓰고 조건+값만 씀)           |
+|    delete()    |                   조건에 맞는 레코드 삭제                   |
+|  softDelete()  |        소프트 삭제 (엔티티에 @DeleteDateColumn 필요)        |
+|   restore()    |                      소프트 삭제 복원                       |
+|    count()     |                   조건에 맞는 개수 카운팅                   |
+|    query()     |                  쿼리 직접 작성 (raw SQL)                   |
+|    create()    |             save() 전에 빈 Entity 인스턴스 생성             |
 
 # Repository 메서드
 
