@@ -5,3 +5,5 @@ Dockerfile
 docker-compose.override.yml
 EOF
 .vscode
+.next
+.turbo
