@@ -7,7 +7,7 @@ trap 'echo "[ERROR] 에러 발생! (Line: $LINENO, Command: $BASH_COMMAND)" >&2;
 # =================================================================================================
 
 # repo를 git 에서 풀 받은 절대 경로
-path_repo='/home/hjj_0106/hjj_server'
+path_repo='/home/hjj0106/hjj_server'
 
 # nginx virtual host 설정 하는 기 위해 경로 존재 및 쓰기 권한 확인
 path_nginx_vhost_file='/etc/nginx/sites-available'
@@ -27,7 +27,7 @@ github_pat="pat_key..."
 # github 연동을 위한 repo url
 github_ssh_url="git@github.com:djd0953/hjj_server.git"
 # 테스트 서버에서 사용할 branch name
-github_use_branch="alpha"
+github_use_branch="test_1"
 
 # nvm 설치 할 node version (frontend node version, backend node version, ...기타 사용 버전)
 use_node_version=("16.15.1" "22.14.0" "18.17.0")
