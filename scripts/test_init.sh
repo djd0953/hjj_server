@@ -180,6 +180,12 @@ git fetch origin
 git pull
 nvm use $node_version
 npm install pm2 -g
+
+if [ ! -d "$HOME/hjj_server/package.json" ]; then
+    echo "Error: package.json이 없음"
+    exit 1
+if
+
 npm install --legacy-peer-deps
 
 if [ ! -d "$HOME/hjj_server/scripts" ]; then
