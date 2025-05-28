@@ -1,0 +1,32 @@
+{
+	"name": "hjj-0106",
+	"version": "0.1.0",
+	"private": true,
+	"packageManager": "npm@10.9.2",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"lint": "turbo run lint"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^8.31.0",
+		"@typescript-eslint/parser": "^8.31.0",
+		"eslint": "^9.25.1",
+		"eslint-config-next": "^15.3.1",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"prettier": "^3.5.3",
+		"prettier-plugin-import-sort": "^0.0.7",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"turbo": "2.5.0"
+	},
+	"dependencies": {
+		"@nestjs/typeorm": "^11.0.0",
+		"pg": "^8.15.5",
+		"typeorm": "^0.3.22"
+	}
+}
