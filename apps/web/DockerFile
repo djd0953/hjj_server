@@ -1,8 +1,29 @@
-# React
+# 1) builder stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# 의존성 캐시 레이어
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# 소스 복사 & 빌드
+COPY . .
+RUN npm run build
+
+# 2) production stage
 FROM node:18-alpine
 WORKDIR /app
-COPY . .
-RUN npm install
-RUN npm run build
+
+# prod 의존성만 설치
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# 빌드 결과물 복사
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.js ./
+
+ENV NODE_ENV=production
+
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

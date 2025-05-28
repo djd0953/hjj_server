@@ -1,18 +1,25 @@
-# Step 1: build stage
-FROM node:18-alpine as builder
-
+# 1) build stage
+FROM node:18-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
 COPY . .
 RUN npm run build
 
-# Step 2: production image
+# 2) production stage
 FROM node:18-alpine
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY package*.json ./
-RUN npm install --only=production
 
+# production 의존만 설치
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# 빌드된 JS 복사
+COPY --from=builder /app/dist ./dist
+
+ENV NODE_ENV=production
 EXPOSE 4000
+
 CMD ["node", "dist/main"]
