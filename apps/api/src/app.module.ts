@@ -6,14 +6,14 @@ import { LoginHistoryModule } from '@modules/login_history/login_history.module'
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      useFactory: () => {
-        const config = new mySqlConfig('postgres');
-        return config.createTypeOrmOptions();
-      },
-    }),
-    UserModule,
-    LoginHistoryModule
+    // TypeOrmModule.forRootAsync({
+    //   useFactory: () => {
+    //     const config = new mySqlConfig('postgres');
+    //     return config.createTypeOrmOptions();
+    //   },
+    // }),
+    // UserModule,
+    // LoginHistoryModule
   ],
 })
 export class AppModule {}
