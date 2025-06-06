@@ -29,8 +29,8 @@ export const SliderImage = () => {
     };
 
     useEffect(() => {
-        if (!timeRef.current) resetImageChangeInterval();
-        return clearImageChangeInterval();
+        resetImageChangeInterval();
+        return clearImageChangeInterval;
     }, []);
 
     const handleGoToIndex = (index: number) => {
