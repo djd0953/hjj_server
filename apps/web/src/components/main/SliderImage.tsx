@@ -29,7 +29,7 @@ export const SliderImage = () => {
     };
 
     useEffect(() => {
-        resetImageChangeInterval();
+        if (!timeRef.current) resetImageChangeInterval();
         return clearImageChangeInterval();
     }, []);
 

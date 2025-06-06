@@ -31,8 +31,8 @@ export default function RootLayout({
         <html lang="ko">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <TailwindCSS />
-                <Header />
-                <main className="mx-auto w-full max-w-screen-xl flex-1 px-4">{children}</main>
+                <Header className="mx-auto h-[130px] w-full max-w-screen-xl flex-1 px-5" />
+                <main className="mx-auto w-full max-w-screen-xl flex-1 px-5">{children}</main>
                 <Footer />
             </body>
         </html>

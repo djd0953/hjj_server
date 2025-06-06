@@ -14,15 +14,15 @@ import {
 
 const NavigationMenuPC = () => {
     return (
-        <NavigationMenu className="w-full justify-center" viewport={false}>
+        <NavigationMenu className="z-100 w-full justify-center" viewport={false}>
             <NavigationMenuList className="gap-10">
                 {NAVIGATION_MENU.map((list) => (
                     <NavigationMenuItem className="relative" key={list.group}>
-                        <NavigationMenuTrigger className="text-base font-semibold">
+                        <NavigationMenuTrigger className="text-[1em] font-semibold">
                             {list.title}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent className="left-1/2 -translate-x-1/2 rounded-md bg-white text-center shadow-lg">
-                            <ul className="grid min-w-[220px] grid-cols-1 gap-2 p-4">
+                            <ul className="grid min-w-[200px] grid-cols-1 gap-2 p-4">
                                 {list.items.map((item) => (
                                     <NavigationMenuLink
                                         asChild
