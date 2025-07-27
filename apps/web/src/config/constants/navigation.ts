@@ -9,13 +9,13 @@ export const NAVIGATION_MENU: NAVIGATION_MENU_TYPE[] = [
         items: [
             {
                 id: 1,
-                title: '회사소개',
-                href: '/',
+                title: '보기',
+                href: '/read',
             },
             {
                 id: 2,
-                title: '연혁',
-                href: '/',
+                title: '기록',
+                href: '/write',
             },
             {
                 id: 3,
