@@ -1,9 +1,8 @@
 node_modules
-dist
 .env
-Dockerfile
-docker-compose.override.yml
-EOF
+dist
+.next
+.turbo
 .vscode
 .next
 .turbo
