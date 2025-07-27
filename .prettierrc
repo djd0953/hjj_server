@@ -7,13 +7,13 @@
     "bracketSpacing": true,
     "bracketSameLine": true,
     "arrowParens": "always",
-    "plugins": [
-        "prettier-plugin-import-sort"
-    ],
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
     "importOrder": [
-        "^(react/(.*)$)|^(react$)|^(next/(.*)$)|^(next$)",
-        "^(@core/(.*)$)",
-        "^(@/lib/(.*)$)|^(@/components/(.*)$)|^(@/styles/(.*)$)",
+        "^(react|next)(/.*)?$",
+        "^@core/(.*)$",
+        "^@/lib/(.*)$",
+        "^@/components/(.*)$",
+        "^@/styles/(.*)$",
         "^[./]"
     ],
     "importOrderSeparation": true,
